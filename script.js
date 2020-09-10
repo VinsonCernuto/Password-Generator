@@ -31,6 +31,14 @@ var toUpper = function (x) {
 }
 
 //making variable for convertion 
+alpha2 = alpha.map(toUpper);
+
+var get = document.querySelector("#generate");
+
+get.addEventListener("click", function () {
+  ps= generatePassword();
+  document.getElementById("password").parentElement;placeholder = ps;
+});
 
 
 
@@ -43,8 +51,3 @@ function writePassword() {
 
 }
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword); {
-  ps = generatePassword();
-  document.getElementById("password").placeholer = ps;
-}
