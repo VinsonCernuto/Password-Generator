@@ -40,6 +40,106 @@ get.addEventListener("click", function () {
   document.getElementById("password").parentElement;placeholder = ps;
 });
 
+//fuctions for generator
+
+function generatePassword() {
+  
+  enter = parseInt(prompt("How many characters would you like your password? Choose between 8 and 128"));
+  
+  // First alert 
+  
+  if (!enter) {
+      
+    alert("This needs a value");
+  
+  } else if (enter < 8 || enter > 128) {
+     
+    // confirms user input
+      
+    enter = parseInt(prompt("You must choose between 8 and 128"));
+
+  } else {
+     
+    //when user input is confirmed 
+     
+      confirmNumber = confirm("Will this contain numbers?");
+      confirmCharacter = confirm("Will this contain special characters?");
+      confirmUppercase = confirm("Will this contain Uppercase letters?");
+      confirmLowercase = confirm("Will this contain Lowercase letters?");
+  };
+
+  // Else if user returns negiative 
+  
+  if (!confirmCharacter && !confirmNumber && !confirmUppercase && !confirmLowercase) {
+      choices = alert("You must choose a criteria!");
+
+  }
+  // First if statement when user input prompts to determine choices
+  
+  // Else if for 4 oks
+ 
+  else if (confirmCharacter && confirmNumber && confirmUppercase && confirmLowercase) {
+
+      choices = character.concat(number, alpha, alpha2);
+  }
+  
+  // Else if for 3 oks
+  
+  else if (confirmCharacter && confirmNumber && confirmUppercase) {
+      choices = character.concat(number, alpha2);
+  }
+  
+  else if (confirmCharacter && confirmNumber && confirmLowercase) {
+      choices = character.concat(number, alpha);
+  }
+  
+  else if (confirmCharacter && confirmLowercase && confirmUppercase) {
+      choices = character.concat(alpha, alpha2);
+  }
+  
+  else if (confirmNumber && confirmLowercase && confirmUppercase) {
+      choices = number.concat(alpha, alpha2);
+  }
+  
+  // Else if for 2 oks
+  else if (confirmCharacter && confirmNumber) {
+      choices = character.concat(number);
+
+  
+  } else if (confirmCharacter && confirmLowercase) {
+      choices = character.concat(alpha);
+
+  
+  } else if (confirmCharacter && confirmUppercase) {
+      choices = character.concat(alpha2);
+  
+  }
+  
+  else if (confirmLowercase && confirmNumber) {
+      choices = alpha.concat(number);
+
+  
+  } else if (confirmLowercase && confirmUppercase) {
+      choices = alpha.concat(alpha2);
+
+  
+  } else if (confirmNumber && confirmUppercase) {
+      choices = number.concat(alpha2);
+  
+  }
+  // Else if for ok
+  
+  else if (confirmCharacter) {
+      choices = character;
+  }
+  
+  else if (confirmNumber) {
+      choices = number;
+  }
+  
+  else if (confirmLowercase) {
+      choices = alpha;
+  }
 
 
 // Write password to the #password input
@@ -49,5 +149,4 @@ function writePassword() {
 
   passwordText.value = password;
 
-}
-
+};
