@@ -2,27 +2,27 @@
 
 var enter;
 
-var confirmNumber;
+var checkNumber;
 
-var confirmCharacter;
+var checkCharacter;
 
-var confirmUppercase;
+var checkUppercase;
 
-var confirmLowercase;
+var checklowercase;
 
 // Password variable
 
-// characters 
+// special characters 
 
 character = ["!", "#", "$", "%", "&", "'", "(", ")", "*", "+", ",", "-", ".", "/", "\:", "\;", " < ", "=", " > ", " ? ", "@", "[", "\\", "]", " ^ ", "_", "`", "{", "|", "}", "~"];
 
 // Numbers
 
-number = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+number = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-// Alphabet
+// letters
 
-alpha = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
 //function to convert to uppercase if user choises to
 
@@ -31,7 +31,7 @@ var toUpper = function (x) {
 }
 
 //making variable for convertion 
-alpha2 = alpha.map(toUpper);
+letters2 = letters.map(toUpper);
 
 var get = document.querySelector("#generate");
 
@@ -44,101 +44,100 @@ get.addEventListener("click", function () {
 
 function generatePassword() {
   
-  enter = parseInt(prompt("How many characters would you like your password? Choose between 8 and 128"));
+  enter = parseInt(prompt("Choose between 8 and 128 characters"));
   
   // First alert 
   
   if (!enter) {
       
-    alert("This needs a value");
+    alert("needs a value");
   
   } else if (enter < 8 || enter > 128) {
      
     // confirms user input
       
-    enter = parseInt(prompt("You must choose between 8 and 128"));
+    enter = parseInt(prompt("must be between 8 and 128"));
 
   } else {
      
     //when user input is confirmed 
      
-      confirmNumber = confirm("Will this contain numbers?");
-      confirmCharacter = confirm("Will this contain special characters?");
-      confirmUppercase = confirm("Will this contain Uppercase letters?");
-      confirmLowercase = confirm("Will this contain Lowercase letters?");
+      checkNumber = confirm("Do you want the password to contain numbers?");
+      checkCharacter = confirm("Do you want the password to contain special characters?");
+      checkUppercase = confirm("Do you want the password to contain Uppercase letters?");
+      checklowercase = confirm("Do you want the password to contain Lowercase letters?");
   };
 
   // Else if user returns negiative 
   
-  if (!confirmCharacter && !confirmNumber && !confirmUppercase && !confirmLowercase) {
-      choices = alert("You must choose a criteria!");
+  if (!checkCharacter && !checkNumber && !checkUppercase && !checklowercase) {
+      choices = alert("You must choose!");
 
   }
-  // First if statement when user input prompts to determine choices
   
   // Else if for 4 oks
  
-  else if (confirmCharacter && confirmNumber && confirmUppercase && confirmLowercase) {
+  else if (checkCharacter && checkNumber && checkUppercase && checklowercase) {
 
-      choices = character.concat(number, alpha, alpha2);
+      choices = character.concat(number, letters, letters2);
   }
   
   // Else if for 3 oks
   
-  else if (confirmCharacter && confirmNumber && confirmUppercase) {
-      choices = character.concat(number, alpha2);
+  else if (checkCharacter && checkNumber && checkUppercase) {
+      choices = character.concat(number, letters2);
   }
   
-  else if (confirmCharacter && confirmNumber && confirmLowercase) {
-      choices = character.concat(number, alpha);
+  else if (checkCharacter && checkNumber && checklowercase) {
+      choices = character.concat(number, letters);
   }
   
-  else if (confirmCharacter && confirmLowercase && confirmUppercase) {
-      choices = character.concat(alpha, alpha2);
+  else if (checkCharacter && checklowercase && checkUppercase) {
+      choices = character.concat(letters, letters2);
   }
   
-  else if (confirmNumber && confirmLowercase && confirmUppercase) {
-      choices = number.concat(alpha, alpha2);
+  else if (checkNumber && checklowercase && checkUppercase) {
+      choices = number.concat(letters, letters2);
   }
   
   // Else if for 2 oks
-  else if (confirmCharacter && confirmNumber) {
+  else if (checkCharacter && checkNumber) {
       choices = character.concat(number);
 
   
-  } else if (confirmCharacter && confirmLowercase) {
-      choices = character.concat(alpha);
+  } else if (checkCharacter && checklowercase) {
+      choices = character.concat(letters);
 
   
-  } else if (confirmCharacter && confirmUppercase) {
-      choices = character.concat(alpha2);
+  } else if (checkCharacter && checkUppercase) {
+      choices = character.concat(letters2);
   
   }
   
-  else if (confirmLowercase && confirmNumber) {
-      choices = alpha.concat(number);
+  else if (checklowercase && checkNumber) {
+      choices = letters.concat(number);
 
   
-  } else if (confirmLowercase && confirmUppercase) {
-      choices = alpha.concat(alpha2);
+  } else if (checklowercase && checkUppercase) {
+      choices = letters.concat(letters2);
 
   
-  } else if (confirmNumber && confirmUppercase) {
-      choices = number.concat(alpha2);
+  } else if (checkNumber && checkUppercase) {
+      choices = number.concat(letters2);
   
   }
   // Else if for ok
   
-  else if (confirmCharacter) {
+  else if (checkCharacter) {
       choices = character;
   }
   
-  else if (confirmNumber) {
+  else if (checkNumber) {
       choices = number;
   }
   
-  else if (confirmLowercase) {
-      choices = alpha;
+  else if (checklowercase) {
+      choices = letters;
   }
 
 
@@ -148,5 +147,27 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
+
+};
+
+var password = [];
+
+// Starts pssword generation 
+
+for (var i = 0; i < enter; i++) {
+    var pickChoices = choices[Math.floor(Math.random() * choices.length)];
+    password.push(pickChoices);
+}
+// adds the password array then makes it a string
+
+var ps = password.join("");
+UserInput(ps);
+return ps;
+}
+
+// should put the text in the box 
+
+function UserInput(ps) {
+  document.getElementById("password").textContent = ps;
 
 };
